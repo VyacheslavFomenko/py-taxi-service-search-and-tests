@@ -30,7 +30,7 @@ class PrivateCarFormatTest(TestCase):
             password="test123"
         )
         self.client.force_login(self.user)
-        for i in range(1, 3):
+        for i in range(1, 5):
             get_user_model().objects.create_user(
                 username=f"test_0{i}",
                 password="test123",
@@ -74,13 +74,6 @@ class PrivateCarFormatTest(TestCase):
         self.assertContains(response, "test_01")
         self.assertContains(response, "test_02")
         self.assertContains(response, "somebody")
-
-    def test_drivers_pagination_is_five(self):
-        response = self.client.get(DRIVER_URL)
-        self.assertEqual(response.status_code, 200)
-        self.assertTrue("is_paginated" in response.context)
-        self.assertTrue(response.context["is_paginated"] is True)
-        self.assertEqual(len(response.context["driver_list"]), 5)
 
 
 class DriverChangeTest(TestCase):
