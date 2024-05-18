@@ -29,6 +29,12 @@ class PrivateCarFormatTest(TestCase):
             username="test",
             password="test123"
         )
+        get_user_model().objects.create_user(
+            username="somebody",
+            password="test123",
+            license_number="SOM12345"
+        )
+
         self.client.force_login(self.user)
         for i in range(1, 5):
             get_user_model().objects.create_user(
@@ -36,11 +42,6 @@ class PrivateCarFormatTest(TestCase):
                 password="test123",
                 license_number="TES" + f"{i}" * 5
             )
-        get_user_model().objects.create_user(
-            username="somebody",
-            password="test123",
-            license_number="SOM12345"
-        )
 
     def test_create_driver(self):
         form_data = {
