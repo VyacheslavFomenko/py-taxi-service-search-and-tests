@@ -3,7 +3,12 @@ from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.test import TestCase
 
-from taxi.forms import CarForm, DriverCreationForm, DriverLicenseUpdateForm, validate_license_number
+from taxi.forms import (
+    CarForm,
+    DriverCreationForm,
+    DriverLicenseUpdateForm,
+    validate_license_number
+)
 from taxi.models import Manufacturer
 
 
@@ -27,12 +32,13 @@ class CarFormTest(TestCase):
             username="test_username",
             license_number="ABC12346",
             password="Test1234q",
+
         )
 
         form_data = {
             "model": "model_test",
             "manufacturer": manufacturer.id,
-            "drivers": [user.id,]
+            "drivers": [user.id, ]
         }
 
         form = CarForm(data=form_data)
@@ -96,5 +102,3 @@ class ValidateLicenseNumberTest(TestCase):
         invalid_license_number = "ABCxyz12"
         with self.assertRaises(ValidationError):
             validate_license_number(invalid_license_number)
-
-

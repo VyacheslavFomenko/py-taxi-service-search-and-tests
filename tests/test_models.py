@@ -6,8 +6,14 @@ from taxi.models import Manufacturer, Car, Driver
 
 class TestModels(TestCase):
     def test_manufacturer_str(self):
-        manufacturer = Manufacturer.objects.create(name="Test Manufacturer", country="Test Country")
-        self.assertEqual(str(manufacturer), f"{manufacturer.name} {manufacturer.country}")
+        manufacturer = Manufacturer.objects.create(
+            name="Test Manufacturer",
+            country="Test Country")
+        self.assertEqual(
+            str(manufacturer),
+            f"{manufacturer.name} "
+            f"{manufacturer.country}"
+        )
 
     def test_driver_str(self):
         driver = get_user_model().objects.create(
@@ -35,7 +41,11 @@ class TestModels(TestCase):
         self.assertTrue(driver.check_password(password))
 
     def test_car_str(self):
-        manufacturer = Manufacturer.objects.create(name="Test Manufacturer", country="Test Country")
+        manufacturer = Manufacturer.objects.create(
+            name="Test Manufacturer",
+            country="Test Country"
+        )
+
         car = Car.objects.create(
             manufacturer=manufacturer,
             model="Test Model"

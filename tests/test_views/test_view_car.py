@@ -31,7 +31,7 @@ class PrivateCarFormatTest(TestCase):
             manufacturer=self.manufacturer
         )
         self.user = get_user_model().objects.create_user(
-            username='test',
+            username="test",
             password="test123"
         )
 
